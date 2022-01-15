@@ -6,7 +6,7 @@ Download the data from kaggle at https://www.kaggle.com/hsankesara/flickr-image-
 
 Larger dataset availible at https://www.kaggle.com/adityajn105/flickr30k
 
-Word embeddings from https://www.kaggle.com/kincorpes/glove6b200d
+Word embeddings from https://www.kaggle.com/incorpes/glove6b200d
 
 Unzip the datasets
 

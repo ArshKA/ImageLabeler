@@ -1,3 +1,6 @@
+from vocabBuilder import create_vocabulary
+
+import csv
 import numpy as np
 import pandas as pd
 from numpy import array
@@ -32,7 +35,11 @@ EMBEDDING_PATH = '/content/glove.6B.200d.txt'
 IMAGE_PATH = '/content/flickr30k_images/flickr30k_images'
 max_len = 34
 
+create_vocabulary(LABEL_PATH)
 
+with open('vocabIndex.csv') as csv_file:
+    reader = csv.reader(csv_file)
+    idxtodict = dict(reader)
 
 print('Processing Images...')
 def preprocess(image_path):

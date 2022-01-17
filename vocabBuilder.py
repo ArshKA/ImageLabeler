@@ -1,3 +1,4 @@
+import csv
 
 def get_descriptions(LABEL_PATH):
   with open(LABEL_PATH, 'r') as file:

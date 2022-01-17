@@ -3,7 +3,6 @@ import pandas as pd
 from numpy import array
 import pandas as pd
 import matplotlib.pyplot as plt
-%matplotlib inline
 import string
 import random
 from copy import copy

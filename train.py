@@ -139,4 +139,4 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics = ['acc
 
 generator = data_generator(tuple_dataset[len(tuple_dataset)//5:], wordtoix, max_len, 128)
 val_generator = data_generator(tuple_dataset[:len(tuple_dataset)//5], wordtoix, max_len, 64)
-model.fit_generator(generator, epochs=100, verbose=1, steps_per_epoch=200, validation_data = val_generator, validation_steps=27)
+model.fit(generator, epochs=100, verbose=1, steps_per_epoch=200, validation_data = val_generator, validation_steps=27)

@@ -1,6 +1,10 @@
 import csv
+import numpy as np
+from numpy import array
+import string
+from copy import copy
 
-def get_descriptions(LABEL_PATH):
+def get_descriptions(LABEL_PATH, max_len):
   with open(LABEL_PATH, 'r') as file:
     doc = file.readlines()
 
@@ -27,8 +31,8 @@ def get_descriptions(LABEL_PATH):
 
   return descriptions
 
-def create_vocabulary(LABEL_PATH):
-  descriptions = get_descriptions(LABEL_PATH)
+def create_vocabulary(LABEL_PATH, EMBEDDING_PATH, max_len):
+  descriptions = get_descriptions(LABEL_PATH, max_len)
 
   table = str.maketrans('', '', string.punctuation)
   for key in descriptions.keys():
@@ -91,3 +95,4 @@ def create_vocabulary(LABEL_PATH):
     writer = csv.writer(csv_file)
     for key, value in ixtoword.items():
        writer.writerow([key, value])
+  return descriptions

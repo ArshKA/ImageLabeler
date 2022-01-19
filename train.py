@@ -4,6 +4,7 @@ import csv
 import numpy as np
 import string
 import random
+import os
 from copy import copy
 from keras.layers import LSTM, Embedding, TimeDistributed, Dense, RepeatVector, Activation, Flatten, Reshape, concatenate, Dropout, BatchNormalization
 from keras.optimizers import adam_v2
@@ -23,9 +24,11 @@ max_len = 34
 
 descriptions = create_vocabulary(LABEL_PATH, EMBEDDING_PATH, max_len)
 
-with open('vocabIndex.csv') as csv_file:
+with open('{}/{}'.format(os.path.dirname(EMBEDDING_PATH), 'vocabIndex.csv')) as csv_file:
     reader = csv.reader(csv_file)
-    idxtodict = dict(reader)
+    ixtoword = dict(reader)
+wordtoix = {v: k for k, v in ixtoword.items()}
+
 
 print('Processing Images...')
 def preprocess(image_path):

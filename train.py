@@ -2,20 +2,9 @@ from vocabBuilder import create_vocabulary
 
 import csv
 import numpy as np
-import pandas as pd
-from numpy import array
-import pandas as pd
-import matplotlib.pyplot as plt
 import string
 import random
 from copy import copy
-import os
-from PIL import Image
-import glob
-from pickle import dump, load
-from time import time
-from keras.preprocessing import sequence
-from keras.models import Sequential
 from keras.layers import LSTM, Embedding, TimeDistributed, Dense, RepeatVector, Activation, Flatten, Reshape, concatenate, Dropout, BatchNormalization
 from keras.optimizers import adam_v2
 from keras.layers.wrappers import Bidirectional
@@ -26,16 +15,13 @@ from keras.models import Model
 from keras import Input, layers
 from keras import optimizers
 from keras.applications.inception_v3 import preprocess_input
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.utils import to_categorical
 
 LABEL_PATH = '/content/flickr30k_images/results.csv'
 EMBEDDING_PATH = '/content/glove.6B.200d.txt'
 IMAGE_PATH = '/content/flickr30k_images/flickr30k_images'
 max_len = 34
 
-create_vocabulary(LABEL_PATH)
+descriptions = create_vocabulary(LABEL_PATH, EMBEDDING_PATH, max_len)
 
 with open('vocabIndex.csv') as csv_file:
     reader = csv.reader(csv_file)
@@ -150,4 +136,4 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics = ['acc
 
 generator = data_generator(tuple_dataset[len(tuple_dataset)//5:], wordtoix, max_len, 128)
 val_generator = data_generator(tuple_dataset[:len(tuple_dataset)//5], wordtoix, max_len, 64)
-model.fit_generator(generator, epochs=1, verbose=1, steps_per_epoch=200, validation_data = val_generator, validation_steps=27, epochs=100)
+model.fit_generator(generator, epochs=100, verbose=1, steps_per_epoch=200, validation_data = val_generator, validation_steps=27)

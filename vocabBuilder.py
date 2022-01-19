@@ -3,6 +3,7 @@ import numpy as np
 from numpy import array
 import string
 from copy import copy
+import os
 
 def get_descriptions(LABEL_PATH, max_len):
   with open(LABEL_PATH, 'r') as file:
@@ -91,7 +92,7 @@ def create_vocabulary(LABEL_PATH, EMBEDDING_PATH, max_len):
     wordtoix[voc] = i
     ixtoword[i] = voc
     
-  with open('vocabIndex.csv', 'w') as csv_file:  
+  with open('{}/{}'.format(os.path.dirname(EMBEDDING_PATH), 'vocabIndex.csv'), 'w') as csv_file:  
     writer = csv.writer(csv_file)
     for key, value in ixtoword.items():
        writer.writerow([key, value])
